@@ -56,19 +56,31 @@ function renderTaskList(tasksToRender = tasks) {
     taskList.innerHTML = '';
     tasksToRender.forEach((task, index) => {
         const taskListItem = document.createElement('li');
-        taskListItem.textContent = task.text;
+        const taskText = document.createElement('span');
+        taskText.textContent = task.text;
+
         if (task.done) {
-            taskListItem.classList.add('done');
+            taskText.classList.add('done');
+        } else {
+            taskText.classList.add('not-done');
         }
+
+        taskListItem.appendChild(taskText);
+
         taskListItem.addEventListener('dblclick', () => editTask(index));
-        const deleteButton = document.createElement('button');
+ const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Удалить';
         deleteButton.addEventListener('click', () => deleteTask(index));
         taskListItem.appendChild(deleteButton);
-        const doneButton = document.createElement('button');
+ const doneButton = document.createElement('button');
         doneButton.textContent = task.done ? 'Отменить' : 'Выполнено';
-        doneButton.addEventListener('click', () => toggleDone(index));
+        doneButton.addEventListener('click', () => {
+            toggleDone(index);
+
+            taskText.classList.toggle('not-done', !task.done);
+        });
         taskListItem.appendChild(doneButton);
+
         taskList.appendChild(taskListItem);
     });
 }

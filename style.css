@@ -48,10 +48,22 @@ li {
     border-bottom: 1px solid #333;
 }
 
+.not-done {
+    text-decoration: none;
+}
+
 .done {
+    text-decoration: line-through;
+}
+
+/* .done {
     text-decoration: line-through;
     color: #666;
 }
+
+span {
+    user-select: none;
+} */
 
 #task-list {
     display: flex;
